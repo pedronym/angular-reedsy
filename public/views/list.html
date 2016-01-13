@@ -1,0 +1,52 @@
+<div class="book-search container">
+	
+	<!-- Book Filters and Search -->
+	<div class="filters row clearfix">
+
+		<!-- Category Select -->	
+		<div class="form-group col-xs-12 col-sm-4" ng-if="list.categories">
+			<select class="form-control" name="select" ng-model="category" ng-options="category for category in list.categories">
+				<option selected disabled value="">Find me the best:</option>
+			</select>
+		</div>
+
+		<!-- Genre Select -->
+		<div class="form-group col-xs-12 col-sm-4" ng-if="list.genres">
+			<select class="form-control" name="select" ng-model="genre" ng-options="genre for genre in list.genres">
+				<option value="" selected disabled>Books about:</option> 
+			</select>
+		</div>
+
+		<!-- Book Author and Name Search -->
+		<div class="form-group col-xs-12 col-sm-4">
+			<input class="form-control" type="search" placeholder="Search by author or title" ng-model="searchText" minlength="3"></input>
+		</div>
+	</div>
+	<!-- End Book Filters and Search -->
+
+	<!-- Books Display -->
+	<div class="books-container row clearfix" ng-if="list.books">
+		
+		<!-- Book Item -->
+		<div class="book col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="book in list.books | filterByName:searchText">
+			<a ui-sref="view({ id: book.id })">
+				
+				<div class="row">
+					<img class="col-xs-3 img-responsive" ng-src="{{book.author.avatar}}" alt="{{book.author.name}}" width="250" height="250">
+
+					<div class="book-details col-xs-9">
+						<h1>{{book.name}}</h1>
+						<p>by {{book.author.name}}</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="book-rating col-xs-4"><i class="fa fa-heart"></i><span> {{book.likes | number}} likes</span></div>
+					<div class="book-date col-xs-8">{{book.published | fromNow }}</div>
+				</div>
+			</a>
+		</div>
+		<!-- End Book Item -->
+	</div>
+	<!-- End Books Display -->
+</div>

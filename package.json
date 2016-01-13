@@ -1,0 +1,25 @@
+{
+  "name": "angular-reedsys",
+  "version": "1.0.0",
+  "description": "Working Angular exercise for Reedsys",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Lima @ 2016",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "express": "^4.13.3",
+    "moment": "^2.11.1"
+  },
+  "devDependencies": {
+    "angular": "^1.4.8",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express-server": "^0.5.1",
+    "grunt-sass": "^1.1.0",
+    "node-sass": "^3.4.2"
+  }
+}
