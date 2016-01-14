@@ -1,0 +1,13 @@
+// Mixins //
+@mixin drop-shadow($x:0, $y:0, $blur:5px, $spread:0, $opacity:0.2){
+	-webkit-box-shadow: $x $y $blur $spread rgba(0,0,0,$opacity);
+	-moz-box-shadow: $x $y $blur $spread rgba(0,0,0,$opacity);
+	box-shadow: $x $y $blur $spread rgba(0,0,0,$opacity);
+}
+
+@mixin transition($property:all, $timing:0.1s){
+	-webkit-transition: $property $timing ease-in-out;
+	-moz-transition: $property $timing ease-in-out;
+	-o-transition: $property $timing ease-in-out;
+	transition: $property $timing ease-in-out;
+}

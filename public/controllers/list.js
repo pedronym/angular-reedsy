@@ -1,13 +1,13 @@
 'use strict'
 
-var ListController = function($http){
+var ListController = function($http, $stateParams){
 
 	$http.get('/data/books.json')
 	.then(function (books) {
 		this.books = books.data;
 	}.bind(this));
 
-	$http.get('/data/pages')
+	$http.get('/data/pages?page=' + ($stateParams.page || 1))
 	.then(function (pages) {
 		this.currentPage = 0;
 		this.pages = pages.data;
@@ -24,7 +24,6 @@ var ListController = function($http){
 	}.bind(this));
 
 	this.gotoPage = function(value) {
-		console.log(value);
 		this.currentPage = value;
 		return this.currentPage;
 	};

@@ -10,7 +10,7 @@
 
 	 $stateProvider
 	    .state('list', {
-	      url: "/list",
+	      url: "/list?page",
 	      controller: 'ListController',
 	      controllerAs: 'list',
 	      templateUrl: "views/list.html"

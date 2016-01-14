@@ -1,0 +1,79 @@
+<!-- Book Intro - Name, author, category -->
+<div class="intro-container">
+	<div class="container">
+		<div class="row view-summary">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+				<h1>{{view.book.name}}</h1>
+				<h5>by {{view.book.author.name}}</h5>
+				<p>{{view.book.description}}</p>
+
+				<div>
+					<h6>Categories:</h6>
+					<a>{{view.book.genre.category}} ,</a>
+					<a>{{view.book.genre.name}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Book Detail - Description and content -->
+<div class="detail-container">
+	<div class="container">
+		<div class="row view-detail">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+				<h4>Introduction</h4>
+				<h2>{{view.book.description}}</h2>
+				<p ng-repeat="block in view.book.introduction">{{block.content}}</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="detail-author text-center col-xs-4 col-xs-offset-4">
+				<i class="fa fa-user"></i>
+				<h5>Written by {{view.book.author.name}}</h5>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- Book Related - Books with the same category or genre -->
+<div class="related-container">
+	<div class="container">
+		<div class="row books-container">
+
+			<div class="text-center">
+				<h3>Similar Reading</h3>
+				<p>If you like this book, we recommend these emerging titles</p>
+			</div>
+
+			<!-- Book Item -->
+			<div class="book col-xs-12 col-sm-4 col-md-4 col-xl-4 clearfix" ng-repeat="book in view.related">
+				<div class="book-wrapper" ui-sref="view({ id: book.id })">
+					
+					<div class="row">
+						<div class="book-image col-xs-3">
+							<img class="img-responsive" ng-src="{{book.author.avatar}}" alt="{{book.author.name}}" width="250" height="250">
+						</div>
+
+						<div class="book-details col-xs-9">
+							<h1>{{book.name}}</h1>
+							<p>by {{book.author.name}}</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="book-rating col-xs-4">
+							<i class="fa fa-heart"></i>
+							<span> {{book.likes | number}}</span>
+						</div>
+						
+						<div class="book-date col-xs-8">{{book.published | fromNow}}</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Book Item -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,66 @@
+.filters {
+	margin-top: $default-spacing;
+	background-color: $highlight-light;
+	padding: 15px 15px 0;
+	width: 100%;
+}
+
+.books-container {
+	padding: 0 $default-spacing;
+	margin: -15px -20px;
+}
+
+.book {
+	@include transition();
+
+	cursor: pointer;
+	color: $dark;
+	position: relative;
+	padding:5px !important;
+	
+	.book-wrapper {
+		position: relative;
+		color: $dark;
+		background-color: $white;
+		border: 1px solid $light;
+		border-radius: 4px;
+		padding: $default-spacing $default-spacing $default-spacing / 2 $default-spacing;
+	}
+
+	.book-details {
+		h1 {
+			font-size: 1.2em;
+			margin-top: 0.2em;
+			margin-bottom: 0.3em;
+		}
+
+		p {
+			font-size: 0.9em;
+			font-weight: bold;
+		}
+	}
+
+	.book-rating, .book-date {
+		color: $highlight-dark;
+		font-size: 0.8em;
+	}
+
+	.book-date {
+		text-align: right;
+	}
+
+	.book-image {
+		margin-bottom: $default-spacing;
+	}
+
+	img {
+		vertical-align: middle;
+		border-radius: 50% 50%;
+	}
+}
+
+.pagination {
+	a {
+		color: $highlight-dark !important;
+	}
+}

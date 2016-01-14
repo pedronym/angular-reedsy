@@ -1,0 +1,71 @@
+.intro-container, .detail-container, .related-container {
+	width: 100%;
+}
+
+.intro-container {
+	padding: $default-spacing * 3 0;
+	background-color: $lighter;
+
+	a {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+	
+	h1 {
+		margin-top: 0 !important;
+		margin-bottom: 5px !important;
+	}
+
+	h6 {
+		font-weight: bold;
+		margin-top: $default-spacing * 2;
+	}
+
+	h5 {
+		color: $middle;
+		margin-top: 0 !important;
+	}
+}
+
+.detail-container {
+	padding: $default-spacing * 3 0;
+	background-color: $white;
+
+	h2 {
+		margin-bottom: $default-spacing;
+	}
+
+	h4 {
+		color: $middle;
+	}
+
+	h5 {
+		color: $dark;
+	}
+
+	p {
+		margin-bottom: $default-spacing * 2;
+	}
+
+	.detail-author {
+		border-top: 1px solid $middle;
+		margin-top: 1em;
+
+		i {
+			font-size: 5em;
+			color: $middle;
+			margin-top: 0.5em;
+			padding: 10px;
+			background-color: $lighter;
+		    border-radius: 50% 50%;
+		    width: 100px;
+		    height: 100px;
+		    vertical-align: middle;
+		}
+	}
+}
+
+.related-container {
+	padding: $default-spacing 0;
+	background-color: $lighter;
+}

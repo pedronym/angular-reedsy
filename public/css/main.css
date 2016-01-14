@@ -1,37 +1,8 @@
-html, body {
-  background-color: #EEEEEE;
-  background: url(img/handmadepattern.png) repeat top left;
-  color: #333333;
-  font-family: "Lato", "Helvetica", arial, sans-serif; }
-
-header {
-  background-color: #333333;
-  color: #EEEEEE;
-  padding: 1em 0;
-  line-height: 2.4em;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  right: 0;
-  margin: 0 !important;
-  z-index: 100; }
-  header h1 {
-    font-weight: lighter;
-    font-size: 2em;
-    margin: 0; }
-  header p {
-    color: #FFFFFF;
-    margin: 0;
-    text-align: right; }
-
 .filters {
   margin-top: 1em;
   background-color: #BBE46D;
   padding: 15px 15px 0;
-  width: 100%;
-  margin-top: 60px; }
-  .filters .form-group:last-child {
-    margin-bottom: 0; }
+  width: 100%; }
 
 .books-container {
   padding: 0 1em;
@@ -52,28 +23,112 @@ header {
     background-color: #FFFFFF;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    padding: 1em;
-    height: 160px; }
+    padding: 1em 1em 0.5em 1em; }
   .book .book-details h1 {
     font-size: 1.2em;
-    margin-top: 0.6em;
+    margin-top: 0.2em;
     margin-bottom: 0.3em; }
   .book .book-details p {
     font-size: 0.9em;
     font-weight: bold; }
   .book .book-rating, .book .book-date {
     color: #6B812E;
-    position: absolute;
-    bottom: 0.5em; }
+    font-size: 0.8em; }
   .book .book-date {
-    text-align: right;
-    right: 0; }
-  .book img {
-    border-radius: 50% 50%;
+    text-align: right; }
+  .book .book-image {
     margin-bottom: 1em; }
+  .book img {
+    vertical-align: middle;
+    border-radius: 50% 50%; }
 
 .pagination a {
   color: #6B812E !important; }
+
+.intro-container, .detail-container, .related-container {
+  width: 100%; }
+
+.intro-container {
+  padding: 3em 0;
+  background-color: #EEEEEE; }
+  .intro-container a {
+    cursor: pointer;
+    text-decoration: underline; }
+  .intro-container h1 {
+    margin-top: 0 !important;
+    margin-bottom: 5px !important; }
+  .intro-container h6 {
+    font-weight: bold;
+    margin-top: 2em; }
+  .intro-container h5 {
+    color: #BBBBBB;
+    margin-top: 0 !important; }
+
+.detail-container {
+  padding: 3em 0;
+  background-color: #FFFFFF; }
+  .detail-container h2 {
+    margin-bottom: 1em; }
+  .detail-container h4 {
+    color: #BBBBBB; }
+  .detail-container h5 {
+    color: #333333; }
+  .detail-container p {
+    margin-bottom: 2em; }
+  .detail-container .detail-author {
+    border-top: 1px solid #BBBBBB;
+    margin-top: 1em; }
+    .detail-container .detail-author i {
+      font-size: 5em;
+      color: #BBBBBB;
+      margin-top: 0.5em;
+      padding: 10px;
+      background-color: #EEEEEE;
+      border-radius: 50% 50%;
+      width: 100px;
+      height: 100px;
+      vertical-align: middle; }
+
+.related-container {
+  padding: 1em 0;
+  background-color: #EEEEEE; }
+
+html, body {
+  background-color: #EEEEEE;
+  background: url(../img/handmadepaper.png) repeat top left;
+  color: #333333;
+  font-family: "Lato", "Helvetica", arial, sans-serif; }
+
+header {
+  background-color: #333333;
+  color: #EEEEEE;
+  padding: 1em 0;
+  line-height: 2.4em;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  margin: 0 !important;
+  z-index: 100; }
+  header a {
+    color: #FFFFFF; }
+    header a:active, header a :visited, header a :focus {
+      color: #FFFFFF;
+      text-decoration: none; }
+    header a:hover {
+      color: #BBE46D;
+      text-decoration: none; }
+  header h1 {
+    font-weight: lighter;
+    font-size: 2em;
+    margin: 0; }
+  header p {
+    color: #FFFFFF;
+    margin: 0;
+    text-align: right; }
+
+.app-container {
+  margin-top: 58px; }
 
 footer {
   margin-bottom: 20px; }

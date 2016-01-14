@@ -1,5 +1,5 @@
 <!-- Book Filters and Search -->
-	<div class="filters clearfix">
+<div class="filters clearfix">
 		<div class="row">
 			<!-- Category Select -->	
 			<div class="form-group col-xs-12 col-sm-4" ng-if="list.categories">
@@ -20,8 +20,8 @@
 				<input class="form-control" type="search" placeholder="Search by author or title" ng-model="bookSearchQuery" minlength="3"></input>
 			</div>
 		</div>
-	</div>
-	<!-- End Book Filters and Search -->
+</div>
+<!-- End Book Filters and Search -->
 
 <div class="book-search container">
 
@@ -51,11 +51,14 @@
 	<div class="books-container row clearfix" ng-if="list.pages">
 		
 		<!-- Book Item -->
-		<div class="slide-animate book col-xs-12 col-sm-6 col-md-4 col-xl-3 clearfix" ng-repeat="book in list.pages[list.currentPage] | filterByName:bookSearchQuery">
+		<div class="book col-xs-12 col-sm-6 col-md-4 col-xl-3 clearfix" ng-repeat="book in list.pages[list.currentPage] | filterByName:bookSearchQuery">
 			<div class="book-wrapper" ui-sref="view({ id: book.id })">
 				
 				<div class="row">
-					<img class="col-xs-3 img-responsive" ng-src="{{book.author.avatar}}" alt="{{book.author.name}}" width="250" height="250">
+
+					<div class="book-image col-xs-3">
+						<img class="img-responsive" ng-src="{{book.author.avatar}}" alt="{{book.author.name}}" width="250" height="250">
+					</div>
 
 					<div class="book-details col-xs-9">
 						<h1>{{book.name}}</h1>
@@ -64,7 +67,11 @@
 				</div>
 
 				<div class="row">
-					<div class="book-rating col-xs-4"><i class="fa fa-heart"></i><span> {{book.likes | number}} likes</span></div>
+					<div class="book-rating col-xs-4">
+						<i class="fa fa-heart"></i>
+						<span> {{book.likes | number}}</span>
+					</div>
+					
 					<div class="book-date col-xs-8">{{book.published | fromNow}}</div>
 				</div>
 			</div>

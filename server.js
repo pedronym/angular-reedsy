@@ -16,8 +16,10 @@ app.get('/data/books.json', function (req, res) {
 	res.status(200).json(path.join(__dirname+'/public/data/books.json'));
 });
 
+// Returns 12 elements from the books.json file //
 app.get('/data/pages', function(req, res){
 	var books = JSON.parse(fs.readFileSync('public/data/books.json'));
+	console.log('Page is', req.query);
 	var pages = _.chunk(books, 12);
 	res.status(200).send(pages);
 });
@@ -63,6 +65,37 @@ app.get('/data/genres', function(req, res) {
 	res.status(200).send(genres);
 });
 
+// Returns three books with the same category or genre //
+app.get('/data/book/related/:id', function(req, res) {
+	var books = JSON.parse(fs.readFileSync('public/data/books.json'));
+	var relatedBooks = [];
+	var selectedBook = books.filter(function(book) {
+		if(book.id === req.params.id){
+			return book;
+		}
+	});
+	
+	selectedBook = selectedBook[0];
+	books = _.shuffle(books);
+
+	function getRelated(book, limit){
+		var booksFound = 0;
+		var relatedBook = books.filter(function(book) {
+			if(book.genre.name === selectedBook.genre.name || book.genre.category === selectedBook.genre.category){
+				if(booksFound < limit && book.id != selectedBook.id){
+					relatedBooks.push(book);
+					booksFound++;
+				} else {
+					return relatedBooks;
+				}
+			}
+		});
+	};
+	
+	getRelated(selectedBook, 3);
+	res.status(200).send(relatedBooks);
+});
+
 app.listen(3000, function () {
-  console.log('Reedsys Angular - Running on port 3000.');
+  console.log('Reedsys Angular - Running on port 3000');
 });
