@@ -7,7 +7,7 @@ var ListController = function($http, $stateParams){
 		this.books = books.data;
 	}.bind(this));
 
-	$http.get('/data/pages?page=' + ($stateParams.page || 1))
+	$http.get('/data/books?page=' + ($stateParams.page || 1))
 	.then(function (pages) {
 		this.currentPage = 0;
 		this.pages = pages.data;

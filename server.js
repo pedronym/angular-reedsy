@@ -19,9 +19,8 @@ app.get('/data/books.json', function (req, res) {
 // Returns 12 elements from the books.json file //
 app.get('/data/pages', function(req, res){
 	var books = JSON.parse(fs.readFileSync('public/data/books.json'));
-	console.log('Page is', req.query);
 	var pages = _.chunk(books, 12);
-	res.status(200).send(pages);
+	res.status(200).send(pages[req.query.page]);
 });
 
 // Returns the book with the matching id by searching the books.json file //
