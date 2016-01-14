@@ -1,35 +1,58 @@
-<div class="book-search container">
-	
-	<!-- Book Filters and Search -->
-	<div class="filters row clearfix">
+<!-- Book Filters and Search -->
+	<div class="filters clearfix">
+		<div class="row">
+			<!-- Category Select -->	
+			<div class="form-group col-xs-12 col-sm-4" ng-if="list.categories">
+				<select class="form-control" name="select" ng-model="category" ng-options="category for category in list.categories">
+					<option selected disabled value="">Find me the best:</option>
+				</select>
+			</div>
 
-		<!-- Category Select -->	
-		<div class="form-group col-xs-12 col-sm-4" ng-if="list.categories">
-			<select class="form-control" name="select" ng-model="category" ng-options="category for category in list.categories">
-				<option selected disabled value="">Find me the best:</option>
-			</select>
-		</div>
+			<!-- Genre Select -->
+			<div class="form-group col-xs-12 col-sm-4" ng-if="list.genres">
+				<select class="form-control" name="select" ng-model="genre" ng-options="genre for genre in list.genres">
+					<option value="" selected disabled>Books about:</option> 
+				</select>
+			</div>
 
-		<!-- Genre Select -->
-		<div class="form-group col-xs-12 col-sm-4" ng-if="list.genres">
-			<select class="form-control" name="select" ng-model="genre" ng-options="genre for genre in list.genres">
-				<option value="" selected disabled>Books about:</option> 
-			</select>
-		</div>
-
-		<!-- Book Author and Name Search -->
-		<div class="form-group col-xs-12 col-sm-4">
-			<input class="form-control" type="search" placeholder="Search by author or title" ng-model="searchText" minlength="3"></input>
+			<!-- Book Author and Name Search -->
+			<div class="form-group col-xs-12 col-sm-4">
+				<input class="form-control" type="search" placeholder="Search by author or title" ng-model="bookSearchQuery" minlength="3"></input>
+			</div>
 		</div>
 	</div>
 	<!-- End Book Filters and Search -->
 
+<div class="book-search container">
+
+	<!-- Start Pagination -->
+	<nav class="text-center">
+	  	<ul class="pagination">
+	    	<li>
+	      		<a href="#" aria-label="Previous" ng-click="list.previousPage()">
+	        		<span aria-hidden="true">&laquo;</span>
+	      		</a>
+	    	</li>
+	    	
+	    	<li>
+	    		<a href="#" ng-repeat="page in list.pages" ng-click="list.gotoPage($index)">{{$index + 1}}</a>
+	    	</li>
+	    	
+	    	<li>
+	      		<a href="#" aria-label="Next" ng-click="list.nextPage()">
+	        		<span aria-hidden="true">&raquo;</span>
+	      		</a>
+	    	</li>
+	  	</ul>
+	</nav>
+	<!-- End Pagination -->
+
 	<!-- Books Display -->
-	<div class="books-container row clearfix" ng-if="list.books">
+	<div class="books-container row clearfix" ng-if="list.pages">
 		
 		<!-- Book Item -->
-		<div class="book col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="book in list.books | filterByName:searchText">
-			<a ui-sref="view({ id: book.id })">
+		<div class="slide-animate book col-xs-12 col-sm-6 col-md-4 col-xl-3 clearfix" ng-repeat="book in list.pages[list.currentPage] | filterByName:bookSearchQuery">
+			<div class="book-wrapper" ui-sref="view({ id: book.id })">
 				
 				<div class="row">
 					<img class="col-xs-3 img-responsive" ng-src="{{book.author.avatar}}" alt="{{book.author.name}}" width="250" height="250">
@@ -42,11 +65,13 @@
 
 				<div class="row">
 					<div class="book-rating col-xs-4"><i class="fa fa-heart"></i><span> {{book.likes | number}} likes</span></div>
-					<div class="book-date col-xs-8">{{book.published | fromNow }}</div>
+					<div class="book-date col-xs-8">{{book.published | fromNow}}</div>
 				</div>
-			</a>
+			</div>
 		</div>
 		<!-- End Book Item -->
 	</div>
 	<!-- End Books Display -->
+
+	
 </div>

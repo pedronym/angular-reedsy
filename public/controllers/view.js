@@ -4,8 +4,8 @@ var ViewController = function($stateParams, $http) {
 	var id = $stateParams.id;
 
 	$http.get('/data/book/' + id)
-		.then(function(result) {
-			console.log(result);
+		.then(function(book) {
+			this.book = book.data;
 		})
 		.catch(function(error) {
 			console.log(error);

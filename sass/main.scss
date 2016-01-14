@@ -31,15 +31,21 @@ $default-spacing: 1em;
 
 html, body {
 	background-color: $lighter;
+	background: url(img/handmadepattern.png) repeat top left;
 	color: $dark;
 	font-family: $font;
 }
 
 header {
-	background-color: $highlight-dark;
-	color: $highlight-light;
-	padding: $default-spacing;
+	background-color: $dark;
+	color: $lighter;
+	padding: $default-spacing 0;
 	line-height: 2.4em;
+	position: fixed;
+	width: 100%;
+	top:0; right:0;
+	margin: 0 !important;
+	z-index: 100;
 
 	h1 {
 		font-weight: lighter;
@@ -56,26 +62,43 @@ header {
 
 .filters {
 	margin-top: $default-spacing;
+	background-color: $highlight-light;
+	padding: 15px 15px 0;
+	width: 100%;
+	margin-top: 60px;
+
+	.form-group {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.app-container {
+	
 }
 
 .books-container {
 	padding: 0 $default-spacing;
+	margin: -15px -20px;
 }
 
 .book {
 	@include transition();
 
-	padding-top: $default-spacing;
-	padding-bottom: $default-spacing / 2;
 	cursor: pointer;
 	color: $dark;
-	background-color: $white;
-	border: 1px solid $light;
-	border-radius: 4px;
-	margin-bottom: $default-spacing;
+	position: relative;
+	padding:5px !important;
 	
-	a {
+	.book-wrapper {
+		position: relative;
 		color: $dark;
+		background-color: $white;
+		border: 1px solid $light;
+		border-radius: 4px;
+		padding: $default-spacing;
+		height: 160px;
 	}
 
 	.book-details {
@@ -93,10 +116,13 @@ header {
 
 	.book-rating, .book-date {
 		color: $highlight-dark;
+		position: absolute;
+		bottom: $default-spacing / 2;
 	}
 
 	.book-date {
 		text-align: right;
+		right: 0;
 	}
 
 	img {
@@ -105,7 +131,15 @@ header {
 	}
 }
 
+.pagination {
+	a {
+		color: $highlight-dark !important;
+	}
+}
+
 footer {
+	margin-bottom: 20px;
+
 	h6 {
 		text-align: center;
 		color: $middle;

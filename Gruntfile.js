@@ -13,8 +13,8 @@ module.exports = function(grunt) {
         separator: ';',
       },
       dist: {
-        src: ['node_modules/angular/angular.min.js'],
-        dest: 'public/js/angular.js',
+        src: ['node_modules/angular/angular.min.js','node_modules/moment/min/moment.min.js', 'node_modules/angular-ui-router/build/angular-ui-router.min.js'],
+        dest: 'public/js/bundle.js',
       }
     },
     sass: {

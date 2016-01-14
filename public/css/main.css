@@ -1,13 +1,20 @@
 html, body {
   background-color: #EEEEEE;
+  background: url(img/handmadepattern.png) repeat top left;
   color: #333333;
   font-family: "Lato", "Helvetica", arial, sans-serif; }
 
 header {
-  background-color: #6B812E;
-  color: #BBE46D;
-  padding: 1em;
-  line-height: 2.4em; }
+  background-color: #333333;
+  color: #EEEEEE;
+  padding: 1em 0;
+  line-height: 2.4em;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  margin: 0 !important;
+  z-index: 100; }
   header h1 {
     font-weight: lighter;
     font-size: 2em;
@@ -18,26 +25,35 @@ header {
     text-align: right; }
 
 .filters {
-  margin-top: 1em; }
+  margin-top: 1em;
+  background-color: #BBE46D;
+  padding: 15px 15px 0;
+  width: 100%;
+  margin-top: 60px; }
+  .filters .form-group:last-child {
+    margin-bottom: 0; }
 
 .books-container {
-  padding: 0 1em; }
+  padding: 0 1em;
+  margin: -15px -20px; }
 
 .book {
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
-  padding-top: 1em;
-  padding-bottom: 0.5em;
   cursor: pointer;
   color: #333333;
-  background-color: #FFFFFF;
-  border: 1px solid #DDDDDD;
-  border-radius: 4px;
-  margin-bottom: 1em; }
-  .book a {
-    color: #333333; }
+  position: relative;
+  padding: 5px !important; }
+  .book .book-wrapper {
+    position: relative;
+    color: #333333;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    padding: 1em;
+    height: 160px; }
   .book .book-details h1 {
     font-size: 1.2em;
     margin-top: 0.6em;
@@ -46,15 +62,23 @@ header {
     font-size: 0.9em;
     font-weight: bold; }
   .book .book-rating, .book .book-date {
-    color: #6B812E; }
+    color: #6B812E;
+    position: absolute;
+    bottom: 0.5em; }
   .book .book-date {
-    text-align: right; }
+    text-align: right;
+    right: 0; }
   .book img {
     border-radius: 50% 50%;
     margin-bottom: 1em; }
 
-footer h6 {
-  text-align: center;
-  color: #BBBBBB; }
+.pagination a {
+  color: #6B812E !important; }
+
+footer {
+  margin-bottom: 20px; }
+  footer h6 {
+    text-align: center;
+    color: #BBBBBB; }
 
 /*# sourceMappingURL=main.css.map */
