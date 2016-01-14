@@ -17,10 +17,17 @@ app.get('/data/books.json', function (req, res) {
 });
 
 // Returns 12 elements from the books.json file //
-app.get('/data/pages', function(req, res){
+app.get('/data/getpage', function(req, res){
 	var books = JSON.parse(fs.readFileSync('public/data/books.json'));
 	var pages = _.chunk(books, 12);
 	res.status(200).send(pages[req.query.page]);
+});
+
+// Returns 12 elements from the books.json file //
+app.get('/data/pages', function(req, res){
+	var books = JSON.parse(fs.readFileSync('public/data/books.json'));
+	var pages = _.chunk(books, 12);
+	res.status(200).send(pages);
 });
 
 // Returns the book with the matching id by searching the books.json file //

@@ -51,7 +51,7 @@
 	<div class="books-container row clearfix" ng-if="list.pages">
 		
 		<!-- Book Item -->
-		<div class="book col-xs-12 col-sm-6 col-md-4 col-xl-3 clearfix" ng-repeat="book in list.pages[list.currentPage] | filterByName:bookSearchQuery">
+		<div class="book col-xs-12 col-sm-6 col-md-4 col-xl-3 clearfix" ng-repeat="book in list.page | filterByName:bookSearchQuery">
 			<div class="book-wrapper" ui-sref="view({ id: book.id })">
 				
 				<div class="row">

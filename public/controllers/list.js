@@ -7,9 +7,14 @@ var ListController = function($http, $stateParams){
 		this.books = books.data;
 	}.bind(this));
 
-	$http.get('/data/books?page=' + ($stateParams.page || 1))
+	$http.get('/data/getpage?page=' + ($stateParams.page || 1))
 	.then(function (pages) {
 		this.currentPage = 0;
+		this.page = pages.data;
+	}.bind(this));
+
+	$http.get('/data/pages')
+	.then(function (pages) {
 		this.pages = pages.data;
 	}.bind(this));
 
@@ -24,8 +29,11 @@ var ListController = function($http, $stateParams){
 	}.bind(this));
 
 	this.gotoPage = function(value) {
-		this.currentPage = value;
-		return this.currentPage;
+		$http.get('/data/getpage?page=' + ($stateParams.page || 1))
+		.then(function (page) {
+			this.currentPage = value;
+			this.page = page.data;
+		}.bind(this));
 	};
 
 	this.nextPage = function() {
