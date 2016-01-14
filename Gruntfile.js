@@ -54,5 +54,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
 
   grunt.registerTask('dev', ['concat', 'copy', 'express:dev', 'watch']);
-  grunt.registerTask('demo', ['sass', 'concat', 'copy', 'express:dev', 'watch']);
+  grunt.registerTask('heroku:production', ['sass', 'concat', 'copy', 'express:dev', 'watch']);
 };
