@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Working Angular exercise for Reedsys",
   "main": "app.js",
-  "scripts": {
-    "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt run>"
-  },
   "author": "Pedro Lima @ 2016",
   "license": "ISC",
   "dependencies": {
@@ -13,16 +10,19 @@
     "angular-ui-router": "^0.2.15",
     "express": "^4.13.3",
     "font-awesome": "^4.5.0",
-    "grunt-cli": "^0.1.13",
     "lodash": "^4.0.0",
     "moment": "^2.11.1"
   },
   "devDependencies": {
+    "node-sass": "^3.4.2",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-express-server": "^0.5.1",
     "grunt-sass": "^1.1.0",
-    "node-sass": "^3.4.2"
+    "grunt-cli": "^0.1.13"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
