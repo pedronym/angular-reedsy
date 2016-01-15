@@ -2,15 +2,11 @@
 
 var ListController = function($http, $stateParams){
 
+	this.currentPage = 0;
+
 	$http.get('/data/books.json')
 	.then(function (books) {
 		this.books = books.data;
-	}.bind(this));
-
-	$http.get('/data/getpage?page=' + ($stateParams.page || 1))
-	.then(function (pages) {
-		this.currentPage = 0;
-		this.page = pages.data;
 	}.bind(this));
 
 	$http.get('/data/pages')
@@ -29,7 +25,8 @@ var ListController = function($http, $stateParams){
 	}.bind(this));
 
 	this.gotoPage = function(value) {
-		$http.get('/data/getpage?page=' + ($stateParams.page || 1))
+		value = value || 0;
+		$http.get('/data/getpage?page=' + ($stateParams.page || value))
 		.then(function (page) {
 			this.currentPage = value;
 			this.page = page.data;
@@ -37,17 +34,24 @@ var ListController = function($http, $stateParams){
 	};
 
 	this.nextPage = function() {
-		if(this.currentPage < this.pages.length)
-			this.currentPage++ ;
-		
-		return this.currentPage;
+		if(this.currentPage < this.pages.length){
+			this.currentPage++;
+			return this.gotoPage(this.currentPage); 
+		}
 	};
 
 	this.previousPage = function() {
-		if(this.currentPage > 0)
-			this.currentPage-- ;
-		
-		return this.currentPage;
+		if(this.currentPage > 0){
+			this.currentPage--;
+			return this.gotoPage(this.currentPage);
+		}
+	};
+
+	this.filterCategory = function(value) {
+		$http.get('/data/category/' + value)
+		.then(function (result) {
+			this.categories = result.data;
+		}.bind(this));
 	};
 };
 

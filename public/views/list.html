@@ -1,25 +1,25 @@
 <!-- Book Filters and Search -->
 <div class="filters clearfix">
-		<div class="row">
-			<!-- Category Select -->	
-			<div class="form-group col-xs-12 col-sm-4" ng-if="list.categories">
-				<select class="form-control" name="select" ng-model="category" ng-options="category for category in list.categories">
-					<option selected disabled value="">Find me the best:</option>
-				</select>
-			</div>
-
-			<!-- Genre Select -->
-			<div class="form-group col-xs-12 col-sm-4" ng-if="list.genres">
-				<select class="form-control" name="select" ng-model="genre" ng-options="genre for genre in list.genres">
-					<option value="" selected disabled>Books about:</option> 
-				</select>
-			</div>
-
-			<!-- Book Author and Name Search -->
-			<div class="form-group col-xs-12 col-sm-4">
-				<input class="form-control" type="search" placeholder="Search by author or title" ng-model="bookSearchQuery" minlength="3"></input>
-			</div>
+	<div class="row">
+		<!-- Category Select -->	
+		<div class="form-group col-xs-12 col-sm-4" ng-if="list.categories">
+			<select class="form-control" name="select" ng-change="list.filterCategory(category)" ng-model="category" ng-options="category for category in list.categories">
+				<option selected disabled value="">Find me the best:</option>
+			</select>
 		</div>
+
+		<!-- Genre Select -->
+		<div class="form-group col-xs-12 col-sm-4" ng-if="list.genres">
+			<select class="form-control" name="select" ng-model="genre" ng-options="genre for genre in list.genres">
+				<option value="" selected disabled>Books about:</option> 
+			</select>
+		</div>
+
+		<!-- Book Author and Name Search -->
+		<div class="form-group col-xs-12 col-sm-4">
+			<input class="form-control" type="search" placeholder="Search by author or title" ng-model="bookSearchQuery" minlength="3"></input>
+		</div>
+	</div>
 </div>
 <!-- End Book Filters and Search -->
 
@@ -48,7 +48,7 @@
 	<!-- End Pagination -->
 
 	<!-- Books Display -->
-	<div class="books-container row clearfix" ng-if="list.pages">
+	<div class="books-container row clearfix" ng-init="list.gotoPage()" ng-if="list.page">
 		
 		<!-- Book Item -->
 		<div class="book col-xs-12 col-sm-6 col-md-4 col-xl-3 clearfix" ng-repeat="book in list.page | filterByName:bookSearchQuery">
