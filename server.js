@@ -12,12 +12,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
-app.get('/data/books.json', function (req, res) {
+app.get('/data/books', function (req, res) {
 	res.status(200).json(API.getAll());
-});
-
-app.get('/data/getpage', function(req, res){
-	res.status(200).send(API.getPage(req.query.page));
 });
 
 app.get('/data/pages', function(req, res){
@@ -41,7 +37,12 @@ app.get('/data/book/related/:id', function(req, res) {
 });
 
 app.get('/data/category/:name', function(req, res) {
-	res.status(200).send(API.getCategory(req.params.name));
+	console.log('Called', req.params.name);
+	res.status(200).send(API.getCategoryGenres(req.params.name));
+});
+
+app.get('/data/genre/:name', function(req, res) {
+	res.status(200).send(API.getGenreCategories(req.params.name));
 });
 
 app.listen(3000, function () {

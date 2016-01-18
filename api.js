@@ -13,19 +13,12 @@ module.exports = {
 
 	// Returns three books with the same category or genre //
 	getRelated: function(bookId){
-		var relatedBooks = [];
-		
-		var selectedBook = this.getAll().filter(function(book) {
-			if(book.id === bookId){
-				return book;
-			}
-		});
-		
-		selectedBook = selectedBook[0];
-		var shuffled = _.shuffle(model);
+		var shuffled = _.shuffle(this.getAll()),
+			selectedBook = this.getBookById(bookId)[0];
 
 		function findRelated(selectedBook, limit){
 			var booksFound = 0;
+			var relatedBooks = [];
 			var relatedBook = shuffled.filter(function(book) {
 				if(book.genre.name === selectedBook.genre.name || book.genre.category === selectedBook.genre.category){
 					if(booksFound < limit && book.id != selectedBook.id){
@@ -36,6 +29,7 @@ module.exports = {
 					}
 				}
 			});
+			return relatedBooks;
 		};
 
 		return findRelated(selectedBook, 4);
@@ -66,11 +60,32 @@ module.exports = {
 		return categories;
 	},
 
-	getCategory: function(categoryName){
+	getCategoryGenres: function(categoryName){
+		if(categoryName === 'null'){
+			return this.getGenres();
+		}
+
+		var genres = [];
+
+		this.getAll().filter(function(book) {
+			if(book.genre.category === categoryName && genres.indexOf(book.genre.name) < 0){
+				genres.push(book.genre.name);
+			}
+		});
+
+		genres.sort();
+		return genres;
+	},
+
+	getGenreCategories: function(genreName){
+		if(genreName === 'null'){
+			return this.getCategories();
+		}
+
 		var categories = [];
 
 		this.getAll().filter(function(book) {
-			if(categories.indexOf(book.genre.category) === -1 || book.genre.category === categoryName){
+			if(book.genre.name === genreName && categories.indexOf(book.genre.category) < 0){
 				categories.push(book.genre.category);
 			}
 		});
@@ -95,13 +110,7 @@ module.exports = {
 
 	// Retrieves all pages evenly split in an array //
 	getAllPages: function(){
-		var chunked = _.chunk(this.getAll(), 12);
+		var chunked = _.chunk(this.getAll(), 24);
 		return chunked;
-	},
-
-	// Retrieves a specific page from the chunked array //
-	getPage: function(pageNumber){
-		var chunked = _.chunk(this.getAll(), 12);
-		return chunked[pageNumber];
 	}
 }

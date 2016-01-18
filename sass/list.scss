@@ -1,7 +1,7 @@
 .filters {
 	margin-top: $default-spacing;
 	background-color: $highlight-light;
-	padding: 15px 15px 0;
+	padding: 15px 0 0;
 	width: 100%;
 }
 
@@ -19,7 +19,6 @@
 	padding:5px !important;
 	
 	.book-wrapper {
-		position: relative;
 		color: $dark;
 		background-color: $white;
 		border: 1px solid $light;
@@ -53,6 +52,21 @@
 		margin-bottom: $default-spacing * 2;
 	}
 
+	.book-tags {
+		background-color: $lighter;
+		color: $dark;
+		font-size: 0.7em;
+		margin-bottom: -7px;
+		margin-top: 14px;
+		padding: 5px 0;
+		border-radius: 0px 0px 5px 5px;
+		border: 1px solid $light;
+
+		i, span {
+			margin-right: 5px;
+		}
+	}
+
 	img {
 		vertical-align: middle;
 		border-radius: 50% 50%;
@@ -61,6 +75,6 @@
 
 .pagination {
 	a {
-		color: $highlight-dark !important;
+		color: $dark !important;
 	}
 }

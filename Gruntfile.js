@@ -6,6 +6,11 @@ module.exports = function(grunt) {
         options: {
           script: 'server.js'
         }
+      },
+      demo: {
+        options: {
+          script: 'server.js'
+        }
       }
     },
     concat: {
@@ -13,7 +18,7 @@ module.exports = function(grunt) {
         separator: ';',
       },
       dist: {
-        src: ['node_modules/angular/angular.min.js','node_modules/moment/min/moment.min.js', 'node_modules/angular-ui-router/build/angular-ui-router.min.js'],
+        src: ['node_modules/angular/angular.min.js','node_modules/moment/min/moment.min.js', 'node_modules/angular-ui-router/build/angular-ui-router.min.js', 'node_modules/lodash/lodash.js'],
         dest: 'public/js/bundle.js',
       }
     },
@@ -21,6 +26,7 @@ module.exports = function(grunt) {
       main: {
         files: [
           { src: 'node_modules/font-awesome/css/font-awesome.min.css', dest: 'public/css/font-awesome.css' },
+          { src: 'node_modules/bootstrap/dist/css/bootstrap.min.css', dest: 'public/css/bootstrap.css' },
           { src: 'node_modules/font-awesome/fonts/**/*', dest: 'public/fonts/', filter: 'isFile', expand:true, flatten: true}
         ]
       }
@@ -54,5 +60,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
 
   grunt.registerTask('dev', ['concat', 'copy', 'express:dev', 'watch']);
-  grunt.registerTask('heroku:production', ['sass', 'concat', 'copy']);
+  grunt.registerTask('demo', ['concat', 'copy', 'sass', 'express:demo']);
 };

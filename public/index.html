@@ -15,8 +15,8 @@
 
 		<!-- Css -->
 		<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Lato:400,700,300,600'>
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
+		
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -28,15 +28,19 @@
 	<body ng-app="app">
 		
 		<!-- Reedsy Header -->
-		<header class="row">
-			<h1 class="col-xs-12 col-sm-4"><a href="/">Reedsy</a></h1>
-			<p class="hidden-xs col-sm-8">Where authors meet the best editors, designers and marketers for their books</p>
+		<header>
+			<div class="container">
+				<div class="row">
+					<h1 class="col-xs-12 col-sm-4"><a href="/">Reedsy</a></h1>
+					<p class="hidden-xs col-sm-8">Where authors meet the best editors, designers and marketers for their books</p>
+				</div>
+			</div>
 		</header>
 
 		<div class="app-container" ui-view></div>
 
 		<footer class="container">
-			<h6>Made by Pedro Lima - Built with Angular.js - 2016</h6>
+			<h6>Made by <a href="https://pt.linkedin.com/in/pedromiguellima">Pedro Lima</a> - Built with Angular.js - 2016</h6>
 		</footer>
 
 		<script src="js/bundle.js"></script>
