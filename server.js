@@ -16,10 +16,6 @@ app.get('/data/books', function (req, res) {
 	res.status(200).json(API.getAll());
 });
 
-app.get('/data/pages', function(req, res){
-	res.status(200).send(API.getAllPages());
-});
-
 app.get('/data/book/:id', function(req, res) {
 	res.status(200).send(API.getBookById(req.params.id));
 });
@@ -37,7 +33,6 @@ app.get('/data/book/related/:id', function(req, res) {
 });
 
 app.get('/data/category/:name', function(req, res) {
-	console.log('Called', req.params.name);
 	res.status(200).send(API.getCategoryGenres(req.params.name));
 });
 

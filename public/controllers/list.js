@@ -1,28 +1,27 @@
 'use strict'
 
+// Define the controller for the List //
 var ListController = function($http, $stateParams){
 
-	this.currentPage = 0;
-	/*this.activeCategory = '';
-	this.activeGenre = '';*/
-
+	// Calls a url that returns all the books from the json file //
 	$http.get('/data/books.json')
-	.then(function (books) {
-		this.allBooks = books.data;
-		this.books = books.data;
+	.then(function (result) {
+		// Sets the books array to two variables //
+		this.allBooks = result.data;
+		this.books = result.data;
+
+		// Use lodash to split the array into parts - 24 per page //
+		this.pages = _.chunk(this.books, 24);
+		this.allPages = this.pages;
 	}.bind(this));
 
-	$http.get('/data/pages')
-	.then(function (pages) {
-		this.allPages = pages.data;
-		this.pages = pages.data;
-	}.bind(this));
-
+	// Calls a url that returns all the categories in each book //
 	$http.get('/data/categories')
 	.then(function (categories) {
 		this.categories = categories.data;
 	}.bind(this));
 
+	// Calls a url that returns all the genres in each book //
 	$http.get('/data/genres')
 	.then(function (genres) {
 		this.allGenres = genres.data;
@@ -36,9 +35,10 @@ var ListController = function($http, $stateParams){
 
 	// Advances to the next page //
 	this.nextPage = function() {
-		if(this.currentPage < this.pages.length){
+		if(this.currentPage < this.pages.length -1){
 			this.currentPage++;
 		}
+		console.log(this.currentPage, this.pages.length - 1);
 	};
 
 	// Goes back to the previous page //
@@ -48,47 +48,61 @@ var ListController = function($http, $stateParams){
 		}
 	};
 
-	// Grabs a category and returns all genres that have that category in common //
+	// Grabs a category and returns all genres that have the passed category in common //
 	this.filterCategoryGenres = function(value) {
-		if(value){
+		
+		// Empty the search field //
+		document.querySelector('#search-books').value = '';
 
+		// Checks to see a value actually exists //
+		if(value !== null){
+			
+			// Saves the value inside a variable // 
 			this.activeCategory = value;
 
+			// For each book with the category passed in the value, get all genres that that book has //
 			$http.get('/data/category/' + this.activeCategory)
 			.then(function (genres) {
 				this.genres = genres.data;
 			}.bind(this));
 
-			document.querySelector('#search-books').value = '';
-			document.querySelector('#filter-genres').selectedIndex = 0;
-
-			this.books = this.allBooks;
-			this.books = this.books.filter(function(book){
+			// Filters all the books to only have the ones that match the category //
+			this.books = this.allBooks.filter(function(book){
 				if(book.genre.category === value){
 					return book;
 				}
 			}.bind(this));
 
-			this.currentPage = 0;
-			console.log('Filtered', this.books.length, 'by category');
+			// Go back to the first page //
+			this.gotoPage(0);
+
+			// Split the array into parts for pagination //
 			this.pages = _.chunk(this.books, 24);
 		} else {
-			this.genres = this.allGenres;
-			this.activeCategory = '';
+			// Clear the activeCategory //
+			this.activeCategory = null;
+
+			// Reset the pages to their initial condition //
 			this.resetPages();
+
+			// If there's no category value then revert the genres // 
+			this.genres = this.allGenres;
+
+			// Clear the genre select //
+			document.querySelector('#filter-genres').selectedIndex = 0;
 		}
 	};
 
 	// Grabs a genre and reverts the category alert to it's default state //
 	this.filterGenresCategory = function(value) {
-		if(value){
-			console.log('Active Genre is', value, 'and Active Category is', this.activeCategory);
 
-			this.activeGenre = value;
-			document.querySelector('#search-books').value = '';
+		// Clears the search field // 
+		document.querySelector('#search-books').value = '';
 
-			this.books = this.allBooks;
-			this.books = this.books.filter(function(book){
+		if(value !== null){
+
+			// Filters all the books to only have the ones that match the genre //
+			this.books = this.allBooks.filter(function(book){
 				if(book.genre.name === value){
 					if(!this.activeCategory){
 						return book;
@@ -100,61 +114,65 @@ var ListController = function($http, $stateParams){
 				}	
 			}.bind(this));
 
-			this.currentPage = 0;
-			console.log('Filtered', this.books.length, 'by genre');
+			// Go back to the first page //
+			this.gotoPage(0);
+
+			// Split the array into parts for pagination //
 			this.pages = _.chunk(this.books, 24);
 		} else {
-			this.activeGenre = '';
+			// Reset the pages to their initial condition //
 			this.resetPages();
 		}
 	};
 
 	// Filters the book if the author or name matches the query in the search input //
 	this.search = function(query){
-		if(query){
-			this.books = this.books.filter(function(book){
-				if(book.author.name.toLowerCase().indexOf(query) !== -1 || book.name.toLowerCase().indexOf(query) !== -1){
-					return book;
-				}
-			});
 
-			this.currentPage = 0;
+		this.clearSelects();
 
-			if(this.books.length > 0){
-				this.pages = [];
-				this.pages[0] = this.books;
-			} 
-
-			if(document.querySelector('#search-books').value.length < 2) {
-				this.pages = this.allPages;
+		// Filter all books that the author name or book name match the query //
+		this.books = this.allBooks.filter(function(book){
+			if(book.author.name.toLowerCase().indexOf(query) !== -1 || book.name.toLowerCase().indexOf(query) !== -1){
+				return book;
 			}
-		} else {
+		});
+
+		// Go back to the first page //
+		this.gotoPage(0);
+
+		// Go the search //
+		if(this.books.length > 0){
+			this.pages = [this.books];
+		} 
+
+		// If the search field is cleared reset the pages //
+		if(document.querySelector('#search-books').value.length < 1) {
 			this.resetPages();
 		}
 	};
 
+	// When the app starts go to the first page //
 	this.init = function() {
 		this.gotoPage(0);
 	};
 
+	// Resets the pagination, pages and books to their initial state //
 	this.resetPages = function() {
 		this.currentPage = 0;
 		this.books = this.allBooks;
 		this.pages = this.allPages;
+
+		// Clear the genre select //
+		document.querySelector('#filter-genres').selectedIndex = 0;
+	};
+
+	// Clear the category and genre selects //
+	this.clearSelects = function() {
+		document.querySelector('#filter-genres').selectedIndex = 0;
+		document.querySelector('#filter-categories').selectedIndex = 0;
 	}
 };
 
-angular.module('app')
-	.controller('ListController', ListController)
-	.filter('filterByName', function() {
-		return function(input, search) {
-			if (!search || search.length === 0) {
-				return input;
-			}
-
-			return input.filter(function(element) {
-				return element.name.toLowerCase().indexOf(search) !== -1 ||
-						element.author.name.toLowerCase().indexOf(search) !== -1;
-			});
-		};
-	});
+// Attach the ListController to the app instance //
+angular.module('app').controller('ListController', ListController);
+	

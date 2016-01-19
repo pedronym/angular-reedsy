@@ -11,7 +11,7 @@ module.exports = {
 		return model;
 	},
 
-	// Returns three books with the same category or genre //
+	// Returns four books with the same category or genre //
 	getRelated: function(bookId){
 		var shuffled = _.shuffle(this.getAll()),
 			selectedBook = this.getBookById(bookId)[0];
@@ -60,6 +60,7 @@ module.exports = {
 		return categories;
 	},
 
+	// Retrieves all genres which match the category passed in a book //
 	getCategoryGenres: function(categoryName){
 		if(categoryName === 'null'){
 			return this.getGenres();
@@ -77,6 +78,7 @@ module.exports = {
 		return genres;
 	},
 
+	// Retrieves all categories which match the genre passed in a book //
 	getGenreCategories: function(genreName){
 		if(genreName === 'null'){
 			return this.getCategories();
@@ -106,11 +108,5 @@ module.exports = {
 
 		genres.sort();
 		return genres;
-	},
-
-	// Retrieves all pages evenly split in an array //
-	getAllPages: function(){
-		var chunked = _.chunk(this.getAll(), 24);
-		return chunked;
 	}
 }

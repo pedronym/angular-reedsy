@@ -76,5 +76,9 @@
 .pagination {
 	a {
 		color: $dark !important;
+
+		&.active {
+			background-color: $lighter !important;
+		}
 	}
 }

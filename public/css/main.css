@@ -54,6 +54,8 @@
 
 .pagination a {
   color: #333333 !important; }
+  .pagination a.active {
+    background-color: #EEEEEE !important; }
 
 .intro-container, .detail-container, .related-container {
   width: 100%; }
@@ -130,6 +132,7 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
+  left: 0;
   right: 0;
   margin: 0 !important;
   z-index: 100; }

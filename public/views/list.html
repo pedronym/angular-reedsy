@@ -19,7 +19,7 @@
 
 			<!-- Book Author and Name Search -->
 			<div class="form-group col-xs-12 col-sm-4">
-				<input id="search-books" class="form-control" type="search" placeholder="Search by author or title" ng-change="list.search(bookSearchQuery)" ng-model="bookSearchQuery" minlength="2"></input>
+				<input ng-focus"list.clearSelects" id="search-books" class="form-control" type="search" placeholder="Search by author or title" ng-change="list.search(bookSearchQuery)" ng-model="bookSearchQuery" minlength="2"></input>
 			</div>
 		</div>
 	</div>
@@ -38,7 +38,7 @@
 	    	</li>
 	    	
 	    	<li>
-	    		<a href="#" ng-repeat="page in list.pages" ng-click="list.gotoPage($index)">{{$index + 1}}</a>
+	    		<a href="#" ng-class="{ active: $index === list.currentPage}" ng-repeat="page in list.pages" ng-click="list.gotoPage($index)">{{$index + 1}}</a>
 	    	</li>
 	    	
 	    	<li>
